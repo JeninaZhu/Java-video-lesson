@@ -1,0 +1,11 @@
+public class Person {
+  int id;
+  int age;
+  Person(int i,int j) {
+    id = i;
+    age = j;
+  }
+  public static void main(String[] args) {
+   Person tom = new Person(1,25); 
+  }
+}
