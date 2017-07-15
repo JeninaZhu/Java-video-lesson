@@ -1,0 +1,36 @@
+1. 编写一个程序，输出一个字符串中的大写英文字母数，小写英文字母数以及非英文字母数。
+public class TestString {
+  public static void main(String[] args){
+     String s = "AaaaBBBBcc&^%adfsdCCOOKK99876 _haHA";
+     int lCount = 0, uCount = 0, oCount = 0;
+     for(int i=0;i<s.length;i++) {
+      char c = s.charAt(i);
+      if(c>='a' && c<='z') {
+        lCount ++;
+      }else if(c>='A' && c<='Z'){
+        uCount ++;
+      }else{
+        oCount ++;
+      }
+     }
+     System.out.println(lCount + " " + uCount + " " + oCount); 
+  }
+}
+
+
+
+2. 编写一个方法，输出在一个字符串中，指定字符出现的次数。
+public class TestString {
+  public static void main(String[] args){
+     String s = "sunjavahpjavaokjavajjavahahajavajavagoodjava";
+     String sToFind = "java";
+     int count = 0;
+     int index =-1;
+     
+     while(index = s.indexOf(sToFind))!=-1){
+       s = s.substring(index + sToFind.length());
+       count++;
+     }
+     System.out.println(count);
+  }
+}
