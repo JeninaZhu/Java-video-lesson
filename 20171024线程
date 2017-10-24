@@ -1,0 +1,41 @@
+创建线程的第一种方式
+public class TestThread1{
+  public static void main(String args[]) {
+    Runner1 r = new Runner1();
+    Thread t = new Thread(r);
+    t.start();
+
+    for(int i=0;i<100;i++){
+      System.out.println("Main Thread:--------" + i);
+    }
+  }
+}
+
+class Runner1 implements Runnable {
+  public void run() {
+    for(int i = 0;i<100;i++) {
+      System.out.println("Runner1:" + i);
+    }
+  }
+}
+//main放下start（）方法后面的部分和start（）方法里面的部分交替运行（并行运行），出来的结果也是Main Thread:--------"显示一部分再Runner1:显示一部分
+//如果不用线程，把设定thread t 改成run方法
+public class TestThread1{
+  public static void main(String args[]) {
+    Runner1 r = new Runner1();
+    r.run();
+
+    for(int i=0;i<100;i++){
+      System.out.println("Main Thread:--------" + i);
+    }
+  }
+}
+
+class Runner1 implements Runnable {
+  public void run() {
+    for(int i = 0;i<100;i++) {
+      System.out.println("Runner1:" + i);
+    }
+  }
+}
+//这样运行出来就直接单线程，先运行自线程"Runner1:1-99再运行主线程Main Thread:--------
