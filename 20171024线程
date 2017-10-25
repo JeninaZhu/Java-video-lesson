@@ -39,3 +39,24 @@ class Runner1 implements Runnable {
   }
 }
 //这样运行出来就直接单线程，先运行自线程"Runner1:1-99再运行主线程Main Thread:--------
+
+第二种方法：
+public class TestThread1{
+  public static void main(String args[]) {
+    Runner1 r = new Runner1();//直接继承了thread本身就是thread了不需要再new一个 ，所以直接r.start就行
+    r.start();
+
+    for(int i=0;i<100;i++){
+      System.out.println("Main Thread:--------" + i);
+    }
+  }
+}
+
+class Runner1 extendts Thread {
+  public void run() {
+    for(int i = 0;i<100;i++) {
+      System.out.println("Runner1:" + i);
+    }
+  }
+}
+总结：尽量使用接口来实现，因为继承只能继承这一个不能继承别的了。
