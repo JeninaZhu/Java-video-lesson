@@ -1,0 +1,39 @@
+Server端
+
+import java.net*；
+import java.io*;
+
+public class Server {
+  public static void main (String[] args){
+    ServerSocket ss = new ServerSocket(6666); //已监听在6666这个端口
+    while(true) {
+     Socket s = ss.accept();  //多个client端可以链接同一个socket端，用了accept方法才可以接收
+     DataInputStream dis = new DataInputStream(s.getInputStream);
+     System.out.println(dis.readUTF());//缺陷：readUTF阻塞式，在等待的时候其他的连不上来
+     dis.close();
+     s.close();
+    }
+  }
+}
+
+
+
+
+
+
+Client端
+
+import java.net*;
+import java.io*;
+
+public class Client {
+  public static void main(String[] args) {
+    Socket s = new Socket("127.0.0.1",6666);//申请链接，写 入ip地址，端口号；；client这边的端口系统随机选一个
+    OutputStream os = s.getOutputStream();
+    DataOutputStream dos = new DataOutputStream(os);
+    dos.writeUTF("hello server!");
+    dos.flush();
+    dos.close();
+    s.close();
+  }
+}
