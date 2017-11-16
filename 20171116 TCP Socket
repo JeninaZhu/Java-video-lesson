@@ -94,7 +94,7 @@ public class TestClient {
 	}
 }
 
-双方都有输入输出：
+双方都有输入输出： 必须有一方先写，不能同时先写。
 import java.io.*; 
 import java.net.*;
 public class TestSockServer {
