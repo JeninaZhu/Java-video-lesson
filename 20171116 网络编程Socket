@@ -33,7 +33,7 @@ public class Client {
 }
 
 
-正式版：
+正式版：一方输出一方输入
 /*	范例名称：简单的client/server程序
  * 	源文件名称：TestClient.java/TestServer.java
  *	要  点：
@@ -93,3 +93,60 @@ public class TestClient {
 		}
 	}
 }
+
+双方都有输入输出：
+import java.io.*; 
+import java.net.*;
+public class TestSockServer {
+  public static void main(String[] args) {
+    InputStream in = null; 
+    OutputStream out = null;
+    try {
+      ServerSocket ss = new ServerSocket(5888);
+      Socket socket = ss.accept();
+      in = socket.getInputStream(); 
+      out = socket.getOutputStream();
+      DataOutputStream dos = new DataOutputStream(out);
+      DataInputStream dis = new DataInputStream(in);
+      String s = null;
+      if((s=dis.readUTF())!=null) {
+	      System.out.println(s);
+	      System.out.println("from: "+socket.getInetAddress());
+	      System.out.println("Port: "+socket.getPort());
+	    }
+      dos.writeUTF("hi，hello"); 
+      dis.close();
+      dos.close();
+      socket.close();
+    } catch (IOException e) {e.printStackTrace();}
+  }
+}
+
+
+import java.net.*;
+import java.io.*;
+public class TestSockClient {
+  public static void main(String[] args) {
+    InputStream is = null; OutputStream os = null;
+    try {
+      Socket socket = new Socket("localhost",5888);
+      is = socket.getInputStream();
+      os = socket.getOutputStream();
+      DataInputStream dis = new DataInputStream(is);
+      DataOutputStream dos = new DataOutputStream(os);
+      dos.writeUTF("hey"); 
+      String s = null;
+      if((s=dis.readUTF())!=null);
+      	System.out.println(s); 
+      dos.close();
+      dis.close();
+      socket.close();
+    } catch (UnknownHostException e) {
+       e.printStackTrace();
+    } catch (IOException e) {e.printStackTrace();}
+  }
+}
+
+
+
+	
