@@ -59,3 +59,73 @@ class Monitor2 implements ActionListener {
 	}
 }
 
+
+TextField：
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class TFActionEvent {
+	public static void main(String[] args) {
+		new TFFrame();
+	}
+}
+
+class TFFrame extends Frame{
+	TFFrame()
+	{
+		TextField tf = new TextField();
+		add(tf);
+		tf.addActionListener(new TFActionListener());
+		pack();
+		setVisible(true);
+	}
+}
+class TFActionListener implements ActionListener
+{
+	public void actionPerformed(ActionEvent e)
+	{
+		TextField tf = (TextField)e.getSource();// getSource方法：访问另一个类里的事件源对象
+		System.out.println(tf.getText());
+		tf.setText("");    //敲完回车后变为空，如果没有这一句，那就还在。
+	}
+}
+
+
+// 输入密码 *号
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class TFPassword {
+
+	public static void main(String[] args) {
+		new TFFrame2();
+	}
+
+}
+
+class TFFrame2 extends Frame
+{
+	TFFrame2()
+	{
+		TextField tf = new TextField();
+		add(tf);
+		tf.addActionListener(new TFActionListener2());
+		tf.setEchoChar('*');    //设置回显字符
+		pack();
+		setVisible(true);
+	}
+}
+
+class TFActionListener2 implements ActionListener
+{
+	public void actionPerformed(ActionEvent e)
+	{
+		TextField tf = (TextField)e.getSource();
+		System.out.println(tf.getText());
+		tf.setText("");
+	}
+}
+
+
